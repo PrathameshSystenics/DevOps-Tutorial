@@ -1,0 +1,6 @@
+server1
+devprodserver
+servertest
+serverprod
+servernew
+backupserver

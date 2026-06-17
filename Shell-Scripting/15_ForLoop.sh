@@ -19,6 +19,12 @@ do
 	echo "Number in Range ${num}"
 done
 
+# For loop with Arrays
+loop_Array=(1 5 6 8 9 "Hello")
 
+for key in ${loop_Array[*]}
+do
+	echo "Value = $key"
+done
 
 
