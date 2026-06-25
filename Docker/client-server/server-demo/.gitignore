@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Environment files (contain credentials)
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Prisma generated client is emitted into node_modules (already ignored above).
+# If you change the generator output, ignore that folder here too.
