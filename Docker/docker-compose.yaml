@@ -1,0 +1,35 @@
+# Name for docker compose
+name: DockerCompose
+# Define the Services :
+services:
+  # define the service name : Docker will communicate with these service name
+  postgres:
+    # container name for the service
+    container_name: postgres-db
+    # Image to use for the service
+    image: postgres:17-alpine
+    # ports  to expose on host and container which is listening on the container
+    ports:
+      - "5432:5432"
+    annotations:
+      description: "Postgresql database service"
+    # Configure the Environment Variables for the service
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydatabase
+
+  # Define the another service
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    links:
+      - postgres:postgres # my database container is called postgres, not db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/mydatabase?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_started

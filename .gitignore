@@ -1,0 +1,5 @@
+instance/
+node-modules/*
+__pycache__/
+*.pyc
+.venv/
