@@ -5,7 +5,6 @@ from sqlalchemy.orm import Mapped, mapped_column
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 app.config["SECRET_KEY"] = "dev-secret-key"
-
 db = SQLAlchemy(app)
 
 

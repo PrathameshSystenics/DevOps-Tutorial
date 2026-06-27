@@ -11,10 +11,30 @@ LABEL com.example.author="Prathamesh" \
 # Run command to execute the commands on the base image
 RUN echo "Hello World"
 
-## Setup the UV
+# Setting the current working directory
+WORKDIR /app
+
+# Setup the UV
 # Download the latest installer
 ADD https://astral.sh/uv/0.11.24/install.sh /uv-installer.sh
+RUN sh /uv-installer.sh && rm /uv-installer.sh
+ENV PATH="/root/.local/bin/:$PATH"
 
 # Setting the Environment variable
 ENV FLASK_APP=app.py \
-    FLASK_ENV=development
+      FLASK_ENV=development \
+      UV_SYSTEM_PYTHON=true
+
+# Copy source code
+COPY pyproject.toml /app/
+
+# Install the Project Dependencies
+RUN uv pip install --system .
+
+# Copy source code
+COPY . /app/
+
+# Expose the Port
+EXPOSE 8080
+ENTRYPOINT ["waitress-serve"]
+CMD ["--host", "0.0.0.0", "app:app"]
